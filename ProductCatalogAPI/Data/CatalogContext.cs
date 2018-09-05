@@ -26,7 +26,7 @@ namespace ProductCatalogAPI.Data
 
         public DbSet<CatalogBrand> CatalogBrands { get; set; }
 
-        public DbSet<CatalogCategory> CatalogCategories { get;set }
+        public DbSet<CatalogCategory> CatalogCategories { get; set; }
 
         public DbSet<CatalogItem> CatalogItems { get; set; }
 
@@ -123,7 +123,7 @@ namespace ProductCatalogAPI.Data
 
                 .HasMaxLength(100);
 
-            builder.Property(c => c.ImageUrl)
+            builder.Property(c => c.PictureUrl)
 
                .IsRequired(false);
 
@@ -151,7 +151,7 @@ namespace ProductCatalogAPI.Data
 
                 .HasMaxLength(100);
 
-            builder.Property(c => c.ImageUrl)
+            builder.Property(c => c.PictureUrl)
 
               .IsRequired(false);
 
@@ -179,7 +179,7 @@ namespace ProductCatalogAPI.Data
 
                 .HasMaxLength(100);
 
-            builder.Property(c => c.ImageUrl)
+            builder.Property(c => c.PictureUrl)
 
               .IsRequired(false);
 

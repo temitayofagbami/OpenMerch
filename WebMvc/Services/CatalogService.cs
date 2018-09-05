@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
+using WebMvc.Services;
 
 namespace WebMvc.Services
 {
@@ -85,11 +86,59 @@ namespace WebMvc.Services
 
 
 
-        public async Task<Catalog> GetCatalogItems(int page, int take, int? brand, int? type)
+        public async Task<IEnumerable<SelectListItem>> GetCategories()
 
         {
 
-            var allcatalogItemsUri = ApiPaths.Catalog.GetAllCatalogItems(_remoteServiceBaseUrl, page, take, brand, type);
+            var getBrandsUri = ApiPaths.Catalog.GetAllCategories(_remoteServiceBaseUrl);
+
+
+
+            var dataString = await _apiClient.GetStringAsync(getBrandsUri);
+
+
+
+            var items = new List<SelectListItem>
+
+            {
+
+                new SelectListItem() { Value = null, Text = "All", Selected = true }
+
+            };
+
+            var categories = JArray.Parse(dataString);
+
+
+
+            foreach (var category in categories.Children<JObject>())
+
+            {
+
+                items.Add(new SelectListItem()
+
+                {
+
+                    Value = category.Value<string>("id"),
+
+                    Text = category.Value<string>("category")
+
+                });
+
+            }
+
+
+
+            return items;
+
+        }
+
+
+
+        public async Task<Catalog> GetCatalogItems(int page, int take, int? brand, int? type, int? category)
+
+        {
+
+            var allcatalogItemsUri = ApiPaths.Catalog.GetAllCatalogItems(_remoteServiceBaseUrl, page, take, brand, type, category);
 
 
 

@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebMvc.Services;
 using WebMvc.ViewModels;
 
 namespace WebMvc.Controllers
 {
-    public class CatalogController
+    public class CatalogController: Controller
     {
         private ICatalogService _catalogSvc;
 
@@ -23,7 +24,7 @@ namespace WebMvc.Controllers
 
             int? BrandFilterApplied,
 
-            int? TypesFilterApplied, int? page)
+            int? TypeFilterApplied, int? page, int? CategoryFilterApplied)
 
         {
 
@@ -37,7 +38,7 @@ namespace WebMvc.Controllers
 
                 (page ?? 0, itemsPage, BrandFilterApplied,
 
-                TypesFilterApplied);
+                TypeFilterApplied, CategoryFilterApplied);
 
             var vm = new CatalogIndexViewModel()
 
@@ -49,9 +50,13 @@ namespace WebMvc.Controllers
 
                 Types = await _catalogSvc.GetTypes(),
 
+                Categories = await _catalogSvc.GetCategories(),
+
                 BrandFilterApplied = BrandFilterApplied ?? 0,
 
-                TypesFilterApplied = TypesFilterApplied ?? 0,
+                TypeFilterApplied = TypeFilterApplied ?? 0,
+
+                CategoryFilterApplied = CategoryFilterApplied ?? 0,
 
                 PaginationInfo = new PaginationInfo()
 
@@ -74,9 +79,7 @@ namespace WebMvc.Controllers
             vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
 
             vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
-
-
-
+            
             return View(vm);
 
         }

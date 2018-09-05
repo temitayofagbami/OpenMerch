@@ -34,12 +34,13 @@ namespace ProductCatalogAPI
 
             // create  connectionString
 
-            // services.AddDbContext<CatalogContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+           // services.AddDbContext<CatalogContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
 
 
             //configure db
             //  services.AddDbContext<CatalogContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
-            //  string connectionString = 
+          
+            //create connectionstring
 
             var server = Configuration["DatabaseServer"];
             var database = Configuration["DatabaseName"];
@@ -47,10 +48,11 @@ namespace ProductCatalogAPI
             var password = Configuration["DatabaseUserPassword"];
             var connectionString = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
 
+            //configure connectionstring
 
-            services.AddDbContext<CatalogContext>(
+           services.AddDbContext<CatalogContext>(
 
-                options => options.UseSqlServer(connectionString));
+               options => options.UseSqlServer(connectionString));
 
 
 
@@ -70,7 +72,7 @@ namespace ProductCatalogAPI
                     new Swashbuckle.AspNetCore.Swagger.Info
                     {
 
-                        Title = "ShoesOnContainers - Product Catalog HTTP API",
+                        Title = "OpenMerch - Product Catalog HTTP API",
                         Version = "v1",
                         Description = "The Product Catalog Microservice HTTP API. This is a Data-Driven/CRUD microservice sample",
                         TermsOfService = "Terms Of Service"
@@ -89,7 +91,7 @@ namespace ProductCatalogAPI
             app.UseSwagger()
            .UseSwaggerUI(c =>
            {
-               c.SwaggerEndpoint($"/swagger/v1/swagger.json", "WishListAPI V1");
+               c.SwaggerEndpoint($"/swagger/v1/swagger.json", "ProductCatalog API V1");
 
            });
             app.UseMvc();

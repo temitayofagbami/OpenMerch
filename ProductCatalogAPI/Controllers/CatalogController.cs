@@ -52,6 +52,18 @@ namespace ProductCatalogAPI.Controllers
             return Ok(items);
         }
 
+
+        //get all CatalogCategories
+        [HttpGet]
+        [Route("[action]")]
+
+        public async Task<IActionResult> CatalogCategories()
+        {
+
+            var items = await _catalogContext.CatalogCategories.ToListAsync();
+            return Ok(items);
+        }
+
         //get all CatalogItems and put 6 items on each page
         [HttpGet]
         [Route("[action]")]
@@ -147,11 +159,11 @@ namespace ProductCatalogAPI.Controllers
         // GET api/Catalog/Items/type/1/brand/null[?pageSize=4&pageIndex=0]
 
         [HttpGet]
-        [Route("[action]/type/{catalogTypeId}/brand/{catalogBrandId}")]
+        [Route("[action]/type/{catalogTypeId}/brand/{catalogBrandId}/category/{catalogCategoryId}")]
 
         public async Task<IActionResult> Items(int? catalogTypeId,
 
-            int? catalogBrandId,
+            int? catalogBrandId, int? catalogCategoryId,
 
             [FromQuery] int pageSize = 6,
 
@@ -168,11 +180,19 @@ namespace ProductCatalogAPI.Controllers
                 root = root.Where(c => c.CatalogTypeId == catalogTypeId);
             }
 
-            // from what is selected  in root, select catalogitems
+            // select out catalog items of specified brand id from root
+
             if (catalogBrandId.HasValue)
             {
                 root = root.Where(c => c.CatalogBrandId == catalogBrandId);
             }
+
+            //select out catalog items of specified category id from root
+            if (catalogCategoryId.HasValue)
+            {
+                root = root.Where(c => c.CatalogCategoryId == catalogCategoryId);
+            }
+
 
             //get args for Paginated view model
 

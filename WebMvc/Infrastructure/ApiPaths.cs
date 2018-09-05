@@ -13,7 +13,7 @@ namespace WebMvc.Infrastructure
 
             public static string GetAllCatalogItems(string baseUri,
 
-                int page, int take, int? brand, int? type)
+                int page, int take, int? brand, int? type, int? category)
 
             {
 
@@ -21,7 +21,7 @@ namespace WebMvc.Infrastructure
 
 
 
-                if (brand.HasValue || type.HasValue)
+                if (brand.HasValue || type.HasValue || category.HasValue)
 
                 {
 
@@ -29,14 +29,16 @@ namespace WebMvc.Infrastructure
 
                     var typeQs = (type.HasValue) ? type.Value.ToString() : "null";
 
-                    filterQs = $"/type/{typeQs}/brand/{brandQs}";
+                    var categoryQs = (category.HasValue) ? category.Value.ToString() : "null";
+
+                    filterQs = $"/type/{typeQs}/brand/{brandQs}/category/{categoryQs}";
 
                 }
 
 
 
-                return $"{baseUri}items{filterQs}?pageIndex={page}&pageSize={take}";
-
+                //return $"{baseUri}items{filterQs}?pageSize={take}&pageindex={page}";
+                return $"{baseUri}items";
             }
 
 
@@ -56,6 +58,14 @@ namespace WebMvc.Infrastructure
             {
 
                 return $"{baseUri}catalogBrands";
+
+            }
+
+            public static string GetAllCategories(string baseUri)
+
+            {
+
+                return $"{baseUri}catalogCategories";
 
             }
 
