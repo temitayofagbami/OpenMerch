@@ -41,7 +41,7 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}items";
             }
 
-
+            //api uri of get 
 
             public static string GetCatalogItem(string baseUri, int id)
 
@@ -49,7 +49,7 @@ namespace WebMvc.Infrastructure
 
 
 
-                return $"{baseUri}/items/{id}";
+                return $"{baseUri}items/{id}";
 
             }
 

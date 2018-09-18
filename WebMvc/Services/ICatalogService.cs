@@ -11,6 +11,8 @@ namespace WebMvc.Services
     {
         Task<Catalog> GetCatalogItems(int page, int take, int? brand, int? type, int? category);
 
+        Task<CatalogItem> GetCatalogItem(int id);
+
         Task<IEnumerable<SelectListItem>> GetBrands();
 
         Task<IEnumerable<SelectListItem>> GetTypes();

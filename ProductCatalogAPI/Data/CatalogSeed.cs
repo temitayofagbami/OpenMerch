@@ -21,7 +21,7 @@ namespace ProductCatalogAPI.Data
             context.Database.Migrate();
 
             //check first if CatalogCategories does not have any categories in it
-            if (!context.CatalogBrands.Any())
+            if (!context.CatalogCategories.Any())
 
             {
                 //add/seed dummy brands into CatalogBrand table

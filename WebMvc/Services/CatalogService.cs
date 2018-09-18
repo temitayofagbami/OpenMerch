@@ -134,25 +134,6 @@ namespace WebMvc.Services
 
 
 
-        public async Task<Catalog> GetCatalogItems(int page, int take, int? brand, int? type, int? category)
-
-        {
-
-            var allcatalogItemsUri = ApiPaths.Catalog.GetAllCatalogItems(_remoteServiceBaseUrl, page, take, brand, type, category);
-
-
-
-            var dataString = await _apiClient.GetStringAsync(allcatalogItemsUri);
-
-
-
-            var response = JsonConvert.DeserializeObject<Catalog>(dataString);
-
-
-
-            return response;
-
-        }
 
 
 
@@ -197,5 +178,51 @@ namespace WebMvc.Services
             return items;
 
         }
+
+
+        //get all items
+        public async Task<Catalog> GetCatalogItems(int page, int take, int? brand, int? type, int? category)
+
+        {
+
+            var allcatalogItemsUri = ApiPaths.Catalog.GetAllCatalogItems(_remoteServiceBaseUrl, page, take, brand, type, category);
+
+
+
+            var dataString = await _apiClient.GetStringAsync(allcatalogItemsUri);
+
+
+
+            var response = JsonConvert.DeserializeObject<Catalog>(dataString);
+
+
+
+            return response;
+
+        }
+
+        //get an item by id
+
+            //service that gets an item by id
+        public async Task<CatalogItem> GetCatalogItem(int id)
+        {
+            //get api url
+            var allcatalogItemsUri = ApiPaths.Catalog.GetCatalogItem(_remoteServiceBaseUrl, id);
+
+            //make api call and return data as string
+
+            var dataString = await _apiClient.GetStringAsync(allcatalogItemsUri);
+
+            //parse the datastring into a catalogItem object to be passed to view for presentation
+            //??ask about wording
+
+            var response = JsonConvert.DeserializeObject<CatalogItem>(dataString);
+
+
+
+            return response;
+
+        }
+
     }
 }

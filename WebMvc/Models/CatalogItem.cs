@@ -25,5 +25,8 @@ namespace WebMvc.Models
         public string CatalogBrand { get; set; }
         public int CatalogTypeId { get; set; }
         public string CatalogType { get; set; }
+        public int CatalogCategoryId { get; set; }
+        public string CatalogCategory { get; set; }
     }
 }
+

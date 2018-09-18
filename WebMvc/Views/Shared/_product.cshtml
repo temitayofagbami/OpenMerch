@@ -2,7 +2,7 @@
 
 <form asp-controller="ProductDetail" asp-action="ProductDetail">
 
-    <input class="esh-event-thumbnail" type="image" name="clickeventdetails" src="@Model.PictureUrl" border="0" alt="EventImage" />
+    <input class="esh-catalog-thumbnail" type="image" name="clickproductdetails" src="@Model.PictureUrl" border="0" alt="ProductImage" />
     
 
     <input type="hidden" asp-for="@Model.Id" name="id" />
@@ -14,14 +14,10 @@
     <input class="esh-event-button" type="submit" value="[ ADD TO CART ]" />
 
     <div class="esh-catalog-name">
-        <a href="@Url.Action("ProductDetail", "ProductDetail", new { id = @Model.Id })" class="esh-catalog-name"><span>@Model.Title</span></a>
+        <a href="@Url.Action("Index", "ProductDetail", new { id = @Model.Id })" class="esh-catalog-name"><span>@Model.Name</span></a>
     </div>
 
-    <div class="esh-catalog-name">
-
-        <span>@Model.Name</span>
-
-    </div>
+  
 
 
     @if (Model.Price == 0)
