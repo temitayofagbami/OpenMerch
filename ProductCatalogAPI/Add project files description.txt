@@ -1,0 +1,26 @@
+﻿Add the Model classes in Domain Folder- 
+CatalogBrand
+CatalogType
+Catalog Item
+CatalogCategory-added later
+
+Added Entityframework nuget package
+Added database context  and seed the dbcontext in Data folder
+CatalogContext-configured tables and their schema 
+CatalogSeed-added seeded data
+
+Added service call to create CatalogContext in Startup.cs
+Added service call to CatalogContext Seed in Program.cs
+
+Added Pic Controller CatalogController in Controller folder
+Added  HTTP request methods in Pic Controller 
+Added Catalog save settings from appsettings
+Added CRUD HTTP request methods in Catalog Controller 
+
+Added PaginatedItemsViewModel class  in ViewModel folder
+Added code in CatalogController - returned  json response of HTTP methods in  PaginatedItemsViewModel object
+
+Added  swashbuckle Nuget package
+Added configuration and service call to swagger  in Startup.cs
+
+
